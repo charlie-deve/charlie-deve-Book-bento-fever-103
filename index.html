@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Book Bento interactif</title>
+  <link rel="stylesheet" href="css/styles.css"/>
+</head>
+<body>
+  <header>
+    <h1>Fever 103° by Sylvia Plath</h1>
+    <p>Interactive book bento</p>
+  </header>
+
+  <div class="stage" id="stage">
+    <div class="canvas" id="canvas">
+      <img src="img/bento.jpg" alt="Book Bento" id="bento"/>
+
+      <div class="hotspot" style="left:55%; top:40%;" data-audio="audio/intro.mp3" data-zoom="1.8" aria-label="Intro">▶
+        <div class="tooltip">Intro — description audio</div>
+      </div>
+      <div class="hotspot" style="left:30%; top:60%;" data-audio="audio/dust.mp3" data-zoom="1.8" aria-label="Dust">▶
+        <div class="tooltip">Dust — description audio</div>
+      </div>
+      <div class="hotspot" style="left:70%; top:55%;" data-audio="audio/horns.mp3" data-zoom="2.0" aria-label="Horns">▶
+        <div class="tooltip">Horns — description audio</div>
+      </div>
+      <div class="hotspot" style="left:25%; top:33%;" data-audio="audio/leopard.mp3" data-zoom="1.7" aria-label="Leopard">▶
+        <div class="tooltip">Leopard — description audio</div>
+      </div>
+      <div class="hotspot" style="left:30%; top:76%;" data-audio="audio/lighter.mp3" data-zoom="1.9" aria-label="Lighter">▶
+        <div class="tooltip">Lighter — description audio</div>
+      </div>
+      <div class="hotspot" style="left:76%; top:67%;" data-audio="audio/rose-flowers.mp3" data-zoom="1.8" aria-label="Rose / Flowers">▶
+        <div class="tooltip">Rose / Flowers — description audio</div>
+      </div>
+      <div class="hotspot" style="left:50%; top:10%;" data-audio="audio/scarf.mp3" data-zoom="2.0" aria-label="Scarf">▶
+        <div class="tooltip">Scarf — description audio</div>
+      </div>
+    </div>
+    <button class="btn closeZoom" id="closeZoom" aria-label="Fermer le zoom">✕</button>
+  </div>
+
+  <div class="controls">
+    <button class="btn" id="pauseAll">⏸️ Pause tout</button>
+    <button class="btn" id="muteToggle">🔈 Muet</button>
+    <span id="status" aria-live="polite"></span>
+  </div>
+
+  <div class="controls">
+    <strong>Liste rapide :</strong>
+    <ul id="tracklist" style="padding-left:10px;margin:0"></ul>
+  </div>
+
+  <audio id="player" preload="auto" controls style="display:block;margin:0 auto;max-width:960px"></audio>
+
+  <div class="footer">© Charlie Dévé — Book Bento HTML/CSS/JS</div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
