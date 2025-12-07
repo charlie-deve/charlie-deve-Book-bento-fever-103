@@ -24,29 +24,22 @@ header p{margin:0;color:var(--muted)}
 
 
 
-/* === Fond image + halo clair bas-droite === */
+
+/* === Fond image (flammes) + halo clair bas-droite === */
 body {
-  /* 1) Lueur claire en bas à droite
-     2) Léger assombrissement global
-     3) Image de fond
+  /* 1) Image de fond (dominante)
+     2) Lueur claire bas-droite
+     3) (optionnel) très léger assombrissement global
   */
   background:
-    radial-gradient(1200px 800px at 92% 92%, rgba(255, 235, 235, 0.26), transparent 55%),
-    linear-gradient(180deg, rgba(0,0,0,0.10), rgba(0,0,0,0.18)),
-    url('img/background.jpg') no-repeat center center fixed;
-
-  /* Tailles des calques de background :
-     - 1: radial (on peut laisser "auto" si tu préfères)
-     - 2: linear (auto)
-     - 3: image : cover
-  */
-  background-size: auto, auto, cover;
-
-  /* Couleur de secours si l'image ne charge pas */
-  background-color: #2b0006;
+    url('img/background.jpg') no-repeat center center fixed,
+    radial-gradient(1200px 800px at 92% 92%, rgba(255, 240, 240, 0.18), transparent 55%),
+    linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0.16));
+  background-size: cover, auto, auto;
+  background-color: #2b0006; /* couleur de secours  background-color: #2b0006; /* couleur de secours si l'image ne charge pas */
 }
 
-/* S'assurer que le contenu passe au-dessus si tu utilises des overlays ailleurs */
-mainmain, .container, .stage {
+/* Assurer que le contenu reste au-dessus */
+main, .container, .stage {
   position: relative;
   z-index: 1;
