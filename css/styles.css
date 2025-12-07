@@ -1,7 +1,39 @@
- :root{--bg:#0e0e10;--fg:#f5f5f7;--muted:#a1a1aa;--accent:#ff4757;--panel:#17171a;--origin-x:50%;--origin-y:50%;--zoom:1.8}
+
+:root{
+  --bg:#0e0e10;        /* Couleur de secours / zones non couvertes */
+  --fg:#f5f5f7;
+  --muted:#a1a1aa;
+  --accent:#ff4757;
+  --panel:#17171a;
+  --origin-x:50%;
+  --origin-y:50%;
+  --zoom:1.8;
+}
+
 *{box-sizing:border-box}
 html,body{margin:0;height:100%}
-body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;background:var(--bg);color:var(--fg)}
+
+/* === UNIQUE règle body ===
+   - Couleur de texte
+   - Image de fond (flammes)
+   - Couleur de secours
+*/
+body{
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
+  color:var(--fg);
+
+  /* Image dominante (flammes) */
+  background-image:url('img/background.jpg');
+  background-repeat:no-repeat;
+  background-position:center center;
+  background-attachment:fixed;
+  background-size:cover;
+
+  /* Couleur de secours pour zones non couvertes / si l'image ne charge pas */
+  background-color:#2b0006; /* ou var(--bg) si tu préfères (#0e0e10 plus noir) */
+}
+
+/* ------------- le reste inchangé ------------- */
 header{max-width:960px;margin:24px auto 8px;padding:0 12px}
 header h1{font-size:clamp(20px,3vw,28px);margin:0 0 6px}
 header p{margin:0;color:var(--muted)}
@@ -17,19 +49,6 @@ header p{margin:0;color:var(--muted)}
 .closeZoom{position:absolute;top:10px;right:10px;display:none;z-index:10;padding:8px 12px;border:1px solid #2a2a2f;background:#1b1b1f;color:var(--fg);border-radius:8px;cursor:pointer}
 .stage.zoomActive .closeZoom{display:block}
 .controls{max-width:960px;margin:8px auto 24px;padding:0 12px;display:flex;gap:8px;align-items:center}
-.btn{padding:8px 12px;border:1px solid #2a2a2f;background:#1b1b1f;color:var(--fg);border-radius:8px;cursor:pointer}
+.btn{padding:8px 12px;border:1px solid #2a2a2f;background:#1b1b1f;color:var(--fg);border-radius:8.btn{padding:8px 12px;border:1px solid #2a2a2f;background:#1b1b1f;color:var(--fg);border-radius:8px;cursor:pointer}
 .btn:hover{background:#232329}
 .footer{max-width:960px;margin:8px auto 28px;padding:0 12px;color:var(--muted);font-size:12px}
-@media (max-width:600px){:root{--zoom:1.5}}
-
-
-
-/* === Fond image de flammes — version minimale === */
-body {
-  background-image: url('img/background.jpg');
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-attachment: fixed;
-  background-size: cover;
-  background-color: #2b0006; /* couleur de secours si l'image ne charge pas */
-}
