@@ -1,54 +1,168 @@
 
+/* ===============================
+   Book Bento – Styles complets
+   - Fond "flammes" + assombrissement (sans opacité)
+   - Mise en page recentrée et limitée à 800px
+   - Tous les styles (hotspots, boutons, etc.)
+   =============================== */
+
 :root{
-  --bg:#0e0e10;        /* Couleur de secours / zones non couvertes */
-  --fg:#f5f5f7;
-  --muted:#a1a1aa;
-  --accent:#ff4757;
-  --panel:#17171a;
+  --bg:#0e0e10;        /* couleur de secours très sombre (non utilisée pour le fond) */
+  --fg:#f5f5f7;        /* texte */
+  --muted:#a1a1aa;     /* texte secondaire */
+  --accent:#ff4757;    /* rouge des hotspots */
+  --panel:#17171a;     /* panneaux / tooltips */
   --origin-x:50%;
   --origin-y:50%;
-  --zoom:1.8;
+  --zoom:1.8;          /* zoom par défaut au clic */
 }
 
-*{box-sizing:border-box}
-html,body{margin:0;height:100%}
+*{ box-sizing:border-box; }
+html, body{ margin:0; height:100%; }
 
 /* === UNIQUE règle body ===
-   - Couleur de texte
-   - Image de fond (flammes)
-   - Couleur de secours
+   - Couleur de base
+   - Le fond "flammes" arrive via ::before pour pouvoir le "traiter" (assombrir, flouter) sans toucher au contenu
 */
 body{
   font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
   color:var(--fg);
-
-  /* Image dominante (flammes) */
-  background-image:url('img/background.jpg');
-  background-repeat:no-repeat;
-  background-position:center center;
-  background-attachment:fixed;
-  background-size:cover;
-
-  /* Couleur de secours pour zones non couvertes / si l'image ne charge pas */
-  background-color:#2b0006; /* ou var(--bg) si tu préfères (#0e0e10 plus noir) */
+  background-color:#2b0006; /* bordeaux sombre de base */
 }
 
-/* ------------- le reste inchangé ------------- */
-header{max-width:960px;margin:24px auto 8px;padding:0 12px}
-header h1{font-size:clamp(20px,3vw,28px);margin:0 0 6px}
-header p{margin:0;color:var(--muted)}
-.stage{position:relative;max-width:960px;margin:12px auto;border-radius:12px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.35)}
-.canvas{position:relative;transition:transform .28s ease;transform-origin:var(--origin-x) var(--origin-y)}
-.canvas.zoomed{transform:scale(var(--zoom))}
-.stage img{width:100%;display:block;height:auto}
-.hotspot{position:absolute;width:32px;height:32px;border-radius:50%;background:var(--accent);display:grid;place-items:center;color:#fff;font-weight:700;cursor:pointer;box-shadow:0 0 0 4px rgba(255,71,87,.25);transition:transform .15s ease,box-shadow .15s ease,opacity .15s ease}
-.hotspot:hover{transform:scale(1.06);box-shadow:0 0 0 6px rgba(255,71,87,.2)}
-.hotspot .tooltip{position:absolute;left:40px;top:-6px;background:var(--panel);padding:8px 10px;border-radius:8px;font-size:14px;white-space:nowrap;display:none;box-shadow:0 8px 20px rgba(0,0,0,.35)}
-.hotspot:hover .tooltip{display:block}
-.canvas.zoomed .hotspot{opacity:.85}
-.closeZoom{position:absolute;top:10px;right:10px;display:none;z-index:10;padding:8px 12px;border:1px solid #2a2a2f;background:#1b1b1f;color:var(--fg);border-radius:8px;cursor:pointer}
-.stage.zoomActive .closeZoom{display:block}
-.controls{max-width:960px;margin:8px auto 24px;padding:0 12px;display:flex;gap:8px;align-items:center}
-.btn{padding:8px 12px;border:1px solid #2a2a2f;background:#1b1b1f;color:var(--fg);border-radius:8.btn{padding:8px 12px;border:1px solid #2a2a2f;background:#1b1b1f;color:var(--fg);border-radius:8px;cursor:pointer}
-.btn:hover{background:#232329}
-.footer{max-width:960px;margin:8px auto 28px;padding:0 12px;color:var(--muted);font-size:12px}
+/* === Fond flammes discret via pseudo-élément (aucune transparence)
+   On assombrit et on "défocus" l'image via FILTER (brightness/contrast/saturate/blur)
+   → Pas d'opacité, donc pas d'effet de transparence, juste une image plus sombre.
+*/
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:0;                /* reste derrière tout le contenu */
+  pointer-events:none;
+
+  /* Image de fond */
+  background: url('img/background.jpg') center center / cover no-repeat fixed;
+
+  /* Traitement visuel (ajuste à ton goût) :
+     - brightness(0.62) → assombrit (0 = noir, 1 = normal)
+     - contrast(0.96)   → baisse très légère du contraste
+     - saturate(0.92)   → saturations un peu moins vives
+     - blur(12px)       → défocus pour calmer l'arrière-plan
+  */
+  filter: brightness(0.62) contrast(0.96) saturate(0.92) blur(12px);
+
+  /* Petit voile interne optionnel (sans opacité globale) :
+     on l'enlève pour respecter "pas de transparence" ; si tu veux plus sombre,
+     baisse encore brightness() ou ajoute un dégradé noir léger dans background. */
+}
+
+/* Le contenu passe au-dessus du fond */
+header, main, .container, .stage, .controls, .footer{
+  position:relative;
+  z-index:1;
+}
+
+/* ======= Mise en page à 800px ======= */
+header{
+  max-width:800px;
+  margin:40px auto 12px;
+  padding:0 12px;
+}
+header h1{
+  font-size:clamp(20px,3vw,28px);
+  margin:0 0 6px;
+}
+header p{
+  margin:0;
+  color:var(--muted);
+}
+
+.stage{
+  position:relative;
+  max-width:800px;               /* ← 800px au lieu de 960 */
+  margin:20px auto;
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 10px 30px rgba(0,0,0,.35);
+}
+
+/* Le canevas gère le zoom */
+.canvas{
+  position:relative;
+  transition:transform .28s ease;
+  transform-origin:var(--origin-x) var(--origin-y);
+}
+.canvas.zoomed{ transform:scale(var(--zoom)); }
+
+/* Image bento : centrée et limitée à 800px */
+.stage img{
+  max-width:800px;               /* ← limite dure de l'image */
+  width:100%;
+  height:auto;
+  display:block;
+  margin:0 auto;
+}
+
+/* ======= Hotspots ======= */
+.hotspot{
+  position:absolute;
+  width:32px; height:32px;
+  border-radius:50%;
+  background:var(--accent);
+  display:grid; place-items:center;
+  color:#fff; font-weight:700;
+  cursor:pointer;
+  box-shadow:0 0 0 4px rgba(255,71,87,.25);
+  transition:transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+}
+.hotspot:hover{
+  transform:scale(1.06);
+  box-shadow:0 0 0 6px rgba(255,71,87,.2);
+}
+.hotspot .tooltip{
+  position:absolute; left:40px; top:-6px;
+  background:var(--panel);
+  padding:8px 10px; border-radius:8px; font-size:14px;
+  white-space:nowrap; display:none;
+  box-shadow:0 8px 20px rgba(0,0,0,.35);
+}
+.hotspot:hover .tooltip{ display:block; }
+.canvas.zoomed .hotspot{ opacity:.85; }
+
+/* ======= Commandes & boutons ======= */
+.closeZoom{
+  position:absolute; top:10px; right:10px;
+  display:none; z-index:10;
+  padding:8px 12px; border:1px solid #2a2a2f;
+  background:#1b1b1f; color:var(--fg);
+  border-radius:8px; cursor:pointer;
+}
+.stage.zoomActive .closeZoom{ display:block; }
+
+.controls{
+  max-width:800px;               /* ← aligné à 800px */
+  margin:12px auto 36px;
+  padding:0 12px;
+  display:flex; gap:8px; align-items:center;
+}
+.btn{
+  padding:8px 12px; border:1px solid #2a2a2f;
+  background:#1b1b1f; color:var(--fg);
+  border-radius:8px; cursor:pointer;
+}
+.btn:hover{ background:#232329; }
+
+.footer.footer{
+  max-width:800px;
+  margin:8px auto 28px;
+  padding:0 12px;
+  color:var(--muted);
+  font-size:12px;
+}
+
+/* ======= Mobile ======= */
+@media (max-width:600px){
+  :root{ --zoom:1.5; }           /* zoom un peu réduit sur mobile */
+  header{ margin:24px auto 8px; }
+  .stage{ margin:12px auto; }
