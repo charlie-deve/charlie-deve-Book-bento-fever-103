@@ -129,3 +129,24 @@ header p{
   header{ margin:24px auto 8px; }
   .stage{ margin:12px auto; }
 }
+
+
+/* === FOND D'ÉCRAN OPTIONNEL — SAFE ===
+   Place le fichier à: img/background.jpg
+   Tu peux ajuster brightness/contrast/saturate/blur.
+*/
+body{
+  position:relative; /* garantit un parent pour ::before */
+}
+body::before{
+   content:"";
+  position:fixed;
+  inset:0;
+  z-index:-1;                /* le fond reste derrière tout */
+  pointer-events:none;       /* jamais cliquable */
+
+  /* Image de fond */
+  background: url('img/background.jpg') center center / cover no-repeat fixed;
+
+  /* Traitement visuel */
+  filter: brightness(0.62) contrast(0.96) saturate(0.92) blur(12px);
