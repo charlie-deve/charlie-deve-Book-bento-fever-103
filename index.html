@@ -1,11 +1,22 @@
+
 <!doctype html>
 <html lang="fr">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Book Bento interactif</title>
-  <link rel="stylesheet" href="css/styles.css"/>
+  css/styles.css
 </head>
+<body style="position:relative;">
+  <!-- Fond discret, non invasif (ne bloque pas les clics, reste derrière tout) -->
+  <div aria-hidden="true"
+       style="
+         position:fixed; inset:0; z-index:-1; pointer-events:none;
+         background: url('img/background.jpg') center center / cover no-repeat fixed;
+         filter: brightness(0.62) contrast(0.96) saturate(0.92) blur(12px);
+       ">
+  </div>
+
   <header>
     <h1>Fever 103° by Sylvia Plath</h1>
     <p>Interactive book bento</p>
@@ -13,7 +24,7 @@
 
   <div class="stage" id="stage">
     <div class="canvas" id="canvas">
-      <img src="img/bento.jpg" alt="Book Bento" id="bento"/>
+      img/bento.jpg
 
       <div class="hotspot" style="left:55%; top:40%;" data-audio="audio/intro.mp3" data-zoom="1.8" aria-label="Intro">▶
         <div class="tooltip">Intro — description audio</div>
@@ -55,6 +66,5 @@
 
   <div class="footer">© Charlie Dévé — Book Bento HTML/CSS/JS</div>
 
-  <script src="js/app.js"></script>
+   js/app.js</script>
 </body>
-</html>
