@@ -32,7 +32,7 @@ body {
   */
   background:
     radial-gradient(1200px 800px at 92% 92%, rgba(255, 235, 235, 0.26), transparent 55%),
-    linear-gradient(180deg, rgba(0,0,0,0.20), rgba(0,0,0,0.28)),
+    linear-gradient(180deg, rgba(0,0,0,0.10), rgba(0,0,0,0.18)),
     url('img/background.jpg') no-repeat center center fixed;
 
   /* Tailles des calques de background :
