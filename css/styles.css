@@ -51,7 +51,7 @@ header, main, .container, .stage, .controls, .footer{
 
 /* ======= Mise en page à 800px ======= */
 header{
-  max-width:800px;
+  max-width:500px;
   margin:40px auto 12px;
   padding:0 12px;
 }
@@ -66,7 +66,7 @@ header p{
 
 .stage{
   position:relative;
-  max-width:800px;
+  max-width:500px;
   margin:20px auto;
   border-radius:12px;
   overflow:hidden;
@@ -83,7 +83,7 @@ header p{
 
 /* Image bento : centrée et limitée à 800px */
 .stage img{
-  max-width:800px;
+  max-width:500px;
   width:100%;
   height:auto;
   display:block;
