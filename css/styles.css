@@ -1,13 +1,13 @@
 
 /* ===============================
-   Book Bento – Styles complets
-   - Fond "flammes" + assombrissement (sans opacité)
+   Book Bento – Styles complets (corrigés)
+   - Fond "flammes" + assombrissement (sans opacité globale)
    - Mise en page recentrée et limitée à 800px
    - Tous les styles (hotspots, boutons, etc.)
    =============================== */
 
 :root{
-  --bg:#0e0e10;        /* couleur de secours très sombre (non utilisée pour le fond) */
+  --bg:#0e0e10;        /* couleur de secours très sombre */
   --fg:#f5f5f7;        /* texte */
   --muted:#a1a1aa;     /* texte secondaire */
   --accent:#ff4757;    /* rouge des hotspots */
@@ -20,41 +20,27 @@
 *{ box-sizing:border-box; }
 html, body{ margin:0; height:100%; }
 
-/* === UNIQUE règle body ===
-   - Couleur de base
-   - Le fond "flammes" arrive via ::before pour pouvoir le "traiter" (assombrir, flouter) sans toucher au contenu
-*/
+/* === UNIQUE règle body === */
 body{
   font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
   color:var(--fg);
-  background-color:#2b0006; /* bordeaux sombre de base */
+  background-color:#2b0006;      /* bordeaux sombre de base */
+  position: relative;            /* 🔧 nécessaire pour gérer z-index du ::before */
 }
 
-/* === Fond flammes discret via pseudo-élément (aucune transparence)
-   On assombrit et on "défocus" l'image via FILTER (brightness/contrast/saturate/blur)
-   → Pas d'opacité, donc pas d'effet de transparence, juste une image plus sombre.
-*/
+/* === Fond flammes via pseudo-élément === */
 body::before{
   content:"";
   position:fixed;
   inset:0;
-  z-index:0;                /* reste derrière tout le contenu */
+  z-index:-1;                    /* 🔧 met vraiment derrière le contenu */
   pointer-events:none;
 
   /* Image de fond */
   background: url('img/background.jpg') center center / cover no-repeat fixed;
 
-  /* Traitement visuel (ajuste à ton goût) :
-     - brightness(0.62) → assombrit (0 = noir, 1 = normal)
-     - contrast(0.96)   → baisse très légère du contraste
-     - saturate(0.92)   → saturations un peu moins vives
-     - blur(12px)       → défocus pour calmer l'arrière-plan
-  */
+  /* Traitement visuel */
   filter: brightness(0.62) contrast(0.96) saturate(0.92) blur(12px);
-
-  /* Petit voile interne optionnel (sans opacité globale) :
-     on l'enlève pour respecter "pas de transparence" ; si tu veux plus sombre,
-     baisse encore brightness() ou ajoute un dégradé noir léger dans background. */
 }
 
 /* Le contenu passe au-dessus du fond */
@@ -80,7 +66,7 @@ header p{
 
 .stage{
   position:relative;
-  max-width:800px;               /* ← 800px au lieu de 960 */
+  max-width:800px;
   margin:20px auto;
   border-radius:12px;
   overflow:hidden;
@@ -97,7 +83,7 @@ header p{
 
 /* Image bento : centrée et limitée à 800px */
 .stage img{
-  max-width:800px;               /* ← limite dure de l'image */
+  max-width:800px;
   width:100%;
   height:auto;
   display:block;
@@ -141,7 +127,7 @@ header p{
 .stage.zoomActive .closeZoom{ display:block; }
 
 .controls{
-  max-width:800px;               /* ← aligné à 800px */
+  max-width:800px;
   margin:12px auto 36px;
   padding:0 12px;
   display:flex; gap:8px; align-items:center;
@@ -153,7 +139,7 @@ header p{
 }
 .btn:hover{ background:#232329; }
 
-.footer.footer{
+.footer{
   max-width:800px;
   margin:8px auto 28px;
   padding:0 12px;
@@ -163,6 +149,6 @@ header p{
 
 /* ======= Mobile ======= */
 @media (max-width:600px){
-  :root{ --zoom:1.5; }           /* zoom un peu réduit sur mobile */
+  :root{ --zoom:1.5; }
   header{ margin:24px auto 8px; }
-  .stage{ margin:12px auto; }
+   .stage{ margin:12px auto; }
