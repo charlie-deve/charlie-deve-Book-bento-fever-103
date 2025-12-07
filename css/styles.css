@@ -47,3 +47,14 @@ body::before {
 main, .container, .stage {
   position: relative;
   z-index: 1;
+
+
+/* TEST MINIMAL : Fond image plein écran */
+body {
+  background-image: url('img/background.jpg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: #2b0006; /* secours si l'image ne charge pas */
+  outline: 2px solid transparent; /* juste pour forcer recalcul du style  outline: 2px solid transparent; /* juste pour forcer recalcul du style */
