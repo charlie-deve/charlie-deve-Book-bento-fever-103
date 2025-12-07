@@ -1,9 +1,9 @@
  :root{--bg:#580000;--fg:#f5f5f7;--muted:#a1a1aa;--accent:#ff4757;--panel:#17171a;--origin-x:50%;--origin-y:50%;--zoom:1.8}
 *{box-sizing:border-box}
 html,body{margin:0;height:100%}
-body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;background:var(--bg);color:var(--fg)}
+body{font-family:'Kumar One',-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;background:var(--bg);color:var(--fg)}
 header{max-width:960px;margin:24px auto 8px;padding:0 12px}
-header h1{font-size:clamp(20px,3vw,28px);margin:0 0 6px}
+header h1{font-size:clamp(28px,4vw,42px); line-height: 1.15; margin:0 0 8px}
 header p{margin:0;color:var(--muted)}
 .stage{position:relative;max-width:960px;margin:12px auto;border-radius:12px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.35)}
 .canvas{position:relative;transition:transform .28s ease;transform-origin:var(--origin-x) var(--origin-y)}
