@@ -24,22 +24,12 @@ header p{margin:0;color:var(--muted)}
 
 
 
-
-/* === Fond image (flammes) + halo clair bas-droite === */
+/* === Fond image de flammes — version minimale === */
 body {
-  /* 1) Image de fond (dominante)
-     2) Lueur claire bas-droite
-     3) (optionnel) très léger assombrissement global
-  */
-  background:
-    url('img/background.jpg') no-repeat center center fixed,
-    radial-gradient(1200px 800px at 92% 92%, rgba(255, 240, 240, 0.18), transparent 55%),
-    linear-gradient(180deg, rgba(0,0,0,0.00), rgba(0,0,0,0.00));
-  background-size: cover, auto, auto;
-  background-color: #2b0006; /* couleur de secours  background-color: #2b0006; /* couleur de secours si l'image ne charge pas */
+  background-image: url('img/background.jpg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: #2b0006; /* couleur de secours si l'image ne charge pas */
 }
-
-/* Assurer que le contenu reste au-dessus */
-main, .container, .stage {
-  position: relative;
-  z-index: 1;
