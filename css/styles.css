@@ -24,37 +24,29 @@ header p{margin:0;color:var(--muted)}
 
 
 
-/* Fond image plein écran */
+/* === Fond image + halo clair bas-droite === */
 body {
-  background: url('img/background.jpg') no-repeat center center fixed;
-  background-size: cover;         /* ← il manquait le ; et c’était écrit 2x “background” */
-  background-color: #14070a;      /* couleur de secours si l'image ne charge pas */
-}
-
-/* Halo clair en bas à droite (paradis) */
-body::before {
-  content: "";
-  position: fixed;                 /* reste en place au scroll */
-  inset: 0;
-  pointer  pointer-events: none;
+  /* 1) Lueur claire en bas à droite
+     2) Léger assombrissement global
+     3) Image de fond
+  */
   background:
-    radial-gradient(1200px 800px at 90% 90%, rgba(255, 230, 230, 0.25), transparent 55%),
-    linear-gradient(180deg, rgba(0,0,0,0.20), rgba(0,0,0,0.28));
-  z-index: 0;
+    radial-gradient(1200px 800px at 92% 92%, rgba(255, 235, 235, 0.26), transparent 55%),
+    linear-gradient(180deg, rgba(0,0,0,0.20), rgba(0,0,0,0.28)),
+    url('img/background.jpg') no-repeat center center fixed;
+
+  /* Tailles des calques de background :
+     - 1: radial (on peut laisser "auto" si tu préfères)
+     - 2: linear (auto)
+     - 3: image : cover
+  */
+  background-size: auto, auto, cover;
+
+  /* Couleur de secours si l'image ne charge pas */
+  background-color: #2b0006;
 }
 
-/* S'assurer que ton contenu passe au-dessus de l'overlay */
-main, .container, .stage {
+/* S'assurer que le contenu passe au-dessus si tu utilises des overlays ailleurs */
+mainmain, .container, .stage {
   position: relative;
   z-index: 1;
-
-
-/* TEST MINIMAL : Fond image plein écran */
-body {
-  background-image: url('img/background.jpg');
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-attachment: fixed;
-  background-size: cover;
-  background-color: #2b0006; /* secours si l'image ne charge pas */
-  outline: 2px solid transparent; /* juste pour forcer recalcul du style  outline: 2px solid transparent; /* juste pour forcer recalcul du style */
