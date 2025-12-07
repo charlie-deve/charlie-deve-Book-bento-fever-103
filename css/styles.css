@@ -1,152 +1,25 @@
-
-/* ===============================
-   Book Bento – Styles stables (sans fond)
-   - Image bento centrée et limitée à 800px
-   - Hotspots + boutons conservés
-   =============================== */
-
-:root{
-  --bg:#0e0e10;        /* couleur de secours */
-  --fg:#f5f5f7;        /* texte */
-  --muted:#a1a1aa;     /* texte secondaire */
-  --accent:#ff4757;    /* rouge hotspots */
-  --panel:#17171a;     /* panneaux / tooltips */
-  --origin-x:50%;
-  --origin-y:50%;
-  --zoom:1.8;          /* zoom par défaut */
-}
-
-*{ box-sizing:border-box; }
-html, body{ margin:0; height:100%; }
-
-body{
-  font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
-  color:var(--fg);
-  background-color:#0e0e10; /* fond uni sobre */
-}
-
-/* ======= Mise en page ======= */
-header{
-  max-width:800px;
-  margin:40px auto 12px;
-  padding:0 12px;
-}
-header h1{
-  font-size:clamp(20px,3vw,28px);
-  margin:0 0 6px;
-}
-header p{
-  margin:0;
-  color:var(--muted);
-}
-
-.stage{
-  position:relative;
-  max-width:800px;
-  margin:20px auto;
-  border-radius:12px;
-  overflow:hidden;
-  box-shadow:0 10px 30px rgba(0,0,0,.35);
-}
-
-/* Le canevas gère le zoom */
-.canvas{
-  position:relative;
-  transition:transform .28s ease;
-  transform-origin:var(--origin-x) var(--origin-y);
-}
-.canvas.zoomed{ transform:scale(var(--zoom)); }
-
-/* ======= Image principale du bento ======= */
-.stage img{
-  max-width:800px;   /* limite stricte */
-  width:100%;
-  height:auto;
-  display:block;
-  margin:0 auto;     /* centrage horizontal */
-}
-
-/* ======= Hotspots ======= */
-.hotspot{
-  position:absolute;
-  width:32px; height:32px;
-  border-radius:50%;
-  background:var(--accent);
-  display:grid; place-items:center;
-  color:#fff; font-weight:700;
-  cursor:pointer;
-  box-shadow:0 0 0 4px rgba(255,71,87,.25);
-  transition:transform .15s ease, box-shadow .15s ease, opacity .15s ease;
-}
-.hotspot:hover{
-  transform:scale(1.06);
-  box-shadow:0 0 0 6px rgba(255,71,87,.2);
-}
-.hotspot .tooltip{
-  position:absolute; left:40px; top:-6px;
-  background:var(--panel);
-  padding:8px 10px; border-radius:8px; font-size:14px;
-  white-space:nowrap; display:none;
-  box-shadow:0 8px 20px rgba(0,0,0,.35);
-}
-.hotspot:hover .tooltip{ display:block; }
-.canvas.zoomed .hotspot{ opacity:.85; }
-
-/* ======= Commandes & boutons ======= */
-.closeZoom{
-  position:absolute; top:10px; right:10px;
-  display:none; z-index:10;
-  padding:8px 12px; border:1px solid #2a2a2f;
-  background:#1b1b1f; color:var(--fg);
-  border-radius:8px; cursor:pointer;
-}
-.stage.zoomActive .closeZoom{ display:block; }
-
-.controls{
-  max-width:800px;
-  margin:12px auto 36px;
-  padding:0 12px;
-  display:flex; gap:8px; align-items:center;
-}
-.btn{
-  padding:8px 12px; border:1px solid #2a2a2f;
-  background:#1b1b1f; color:var(--fg);
-  border-radius:8px; cursor:pointer;
-}
-.btn:hover{ background:#232329; }
-
-.footer{
-  max-width:800px;
-  margin:8px auto 28px;
-  padding:0 12px;
-  color:var(--muted);
-  font-size:12px;
-}
-
-/* ======= Mobile ======= */
-@media (max-width:600px){
-  :root{ --zoom:1.5; }           /* zoom un peu réduit sur mobile */
-  header{ margin:24px auto 8px; }
-  .stage{ margin:12px auto; }
-}
+ :root{--bg:#0e0e10;--fg:#f5f5f7;--muted:#a1a1aa;--accent:#ff4757;--panel:#17171a;--origin-x:50%;--origin-y:50%;--zoom:1.8}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;background:var(--bg);color:var(--fg)}
+header{max-width:960px;margin:24px auto 8px;padding:0 12px}
+header h1{font-size:clamp(20px,3vw,28px);margin:0 0 6px}
+header p{margin:0;color:var(--muted)}
+.stage{position:relative;max-width:960px;margin:12px auto;border-radius:12px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.canvas{position:relative;transition:transform .28s ease;transform-origin:var(--origin-x) var(--origin-y)}
+.canvas.zoomed{transform:scale(var(--zoom))}
+.stage img{width:100%;display:block;height:auto}
+.hotspot{position:absolute;width:32px;height:32px;border-radius:50%;background:var(--accent);display:grid;place-items:center;color:#fff;font-weight:700;cursor:pointer;box-shadow:0 0 0 4px rgba(255,71,87,.25);transition:transform .15s ease,box-shadow .15s ease,opacity .15s ease}
+.hotspot:hover{transform:scale(1.06);box-shadow:0 0 0 6px rgba(255,71,87,.2)}
+.hotspot .tooltip{position:absolute;left:40px;top:-6px;background:var(--panel);padding:8px 10px;border-radius:8px;font-size:14px;white-space:nowrap;display:none;box-shadow:0 8px 20px rgba(0,0,0,.35)}
+.hotspot:hover .tooltip{display:block}
+.canvas.zoomed .hotspot{opacity:.85}
+.closeZoom{position:absolute;top:10px;right:10px;display:none;z-index:10;padding:8px 12px;border:1px solid #2a2a2f;background:#1b1b1f;color:var(--fg);border-radius:8px;cursor:pointer}
+.stage.zoomActive .closeZoom{display:block}
+.controls{max-width:960px;margin:8px auto 24px;padding:0 12px;display:flex;gap:8px;align-items:center}
+.btn{padding:8px 12px;border:1px solid #2a2a2f;background:#1b1b1f;color:var(--fg);border-radius:8px;cursor:pointer}
+.btn:hover{background:#232329}
+.footer{max-width:960px;margin:8px auto 28px;padding:0 12px;color:var(--muted);font-size:12px}
+@media (max-width:600px){:root{--zoom:1.5}}
 
 
-/* === FOND D'ÉCRAN OPTIONNEL — SAFE ===
-   Place le fichier à: img/background.jpg
-   Tu peux ajuster brightness/contrast/saturate/blur.
-*/
-body{
-  position:relative; /* garantit un parent pour ::before */
-}
-body::before{
-   content:"";
-  position:fixed;
-  inset:0;
-  z-index:-1;                /* le fond reste derrière tout */
-  pointer-events:none;       /* jamais cliquable */
-
-  /* Image de fond */
-  background: url('img/background.jpg') center center / cover no-repeat fixed;
-
-  /* Traitement visuel */
-  filter: brightness(0.62) contrast(0.96) saturate(0.92) blur(12px);
